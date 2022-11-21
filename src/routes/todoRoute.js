@@ -11,6 +11,6 @@ router
 router
   .route('/:id')
   .delete(todoController.deleteTodoById)
-  .patch(todoController.updateTodoById);
+  .put(todoController.updateTodoById);
 
 module.exports = router;

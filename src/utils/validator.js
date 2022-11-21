@@ -5,9 +5,7 @@ exports.validateTodo = (title, completed) => {
     throw new ValidationError('title is required');
   }
 
-  if (completed) {
-    if (typeof completed !== 'boolean') {
-      throw new ValidationError('completed must be a boolean');
-    }
+  if (typeof completed !== 'boolean') {
+    throw new ValidationError('completed must be a boolean');
   }
 };
