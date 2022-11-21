@@ -37,3 +37,21 @@ exports.deleteTodoById = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateTodoById = async (req, res, next) => {
+  try {
+    const { title, completed } = req.body;
+    const { id } = req.params;
+    validateTodo(title, completed);
+    const oldAllTodos = await readTodo();
+    const updateTodo = { id, title, completed };
+    const newAllTodos = oldAllTodos.map((item) =>
+      item.id === id ? updateTodo : item
+    );
+    await writeTodo(newAllTodos);
+    res.status(200).json({ todo: updateTodo });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
