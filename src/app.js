@@ -1,13 +1,14 @@
 const express = require('express');
-const notFoundMiddleware = require('./middlewares/notFoundMiddleware');
-const errorMiddleware = require('./middlewares/errorMiddleware');
-const port = 8000;
-
 const app = express();
+const todoRoute = require('./routes/todoRoute');
+const errorMiddleware = require('./middlewares/errorMiddleware');
+const notFoundMiddleware = require('./middlewares/notFoundMiddleware');
+const port = 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use('/todos', todoRoute);
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
