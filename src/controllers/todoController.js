@@ -24,3 +24,16 @@ exports.createNewTodo = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.deleteTodoById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const oldAllTodos = await readTodo();
+    const newAllTodos = oldAllTodos.filter((item) => item.id !== id);
+    await writeTodo(newAllTodos);
+    res.status(200).json({ message: 'success delete todo' });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
